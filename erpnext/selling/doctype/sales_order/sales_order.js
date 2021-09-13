@@ -506,7 +506,11 @@ erpnext.selling.SalesOrderController = erpnext.selling.SellingController.extend(
 				dialog.hide();
 			});
 			dialog.show();
-		} else {
+		} 
+		else if(this.frm.doc.items.some(x => x.checked == 0)){
+			frappe.throw(__('Some Items are not checked. Please verify to create Delivery Note'))
+		}
+		else {
 			this.make_delivery_note();
 		}
 	},

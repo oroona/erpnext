@@ -1961,6 +1961,9 @@ def update_child_qty_rate(parent_doctype, trans_items, parent_doctype_name, chil
 		if d.get("delivery_date") and parent_doctype == 'Sales Order':
 			child_item.delivery_date = d.get('delivery_date')
 
+
+		child_item.checked = d.get('checked')
+
 		if d.get("schedule_date") and parent_doctype == 'Purchase Order':
 			child_item.schedule_date = d.get('schedule_date')
 
