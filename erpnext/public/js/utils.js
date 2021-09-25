@@ -647,7 +647,8 @@ erpnext.utils.update_child_items = function (opts) {
 		dialog.fields_dict.trans_items.grid.refresh();
 	})
 	// dialog.$wrapper.find('.modal-dialog').css("width", "800px");
-	dialog.$wrapper.find('.modal-content').css("width", "60rem");
+	dialog.$wrapper.find('.modal-dialog').css("max-width", "max-content");
+	dialog.$wrapper.find('.modal-content').css("width", "max-content");
 	dialog.show();
 }
 
