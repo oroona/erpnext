@@ -51,10 +51,15 @@ class DeliveryTrip(Document):
 
 		if self.docstatus == 1:
 			visited_stops = [stop.visited for stop in self.delivery_stops]
-			if all(visited_stops):
+			returned = [stop.returned for stop in self.delivery_stops]
+			if all(visited_stops) and any(returned):
+				status = "Completed with Order Return"
+			elif all(visited_stops):
 				status = "Completed"
 			elif any(visited_stops):
 				status = "In Transit"
+			from roona.utils import logger
+			logger.debug(status)
 
 		self.db_set("status", status)
 

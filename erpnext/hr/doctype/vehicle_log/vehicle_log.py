@@ -8,6 +8,7 @@ from frappe import _
 from frappe.utils import flt, cstr
 from frappe.model.mapper import get_mapped_doc
 from frappe.model.document import Document
+from frappe.utils.data import nowdate
 
 class VehicleLog(Document):
 	def validate(self):
@@ -46,3 +47,22 @@ def make_expense_claim(docname):
 		"amount": claim_amount
 	})
 	return exp_claim.as_dict()
+
+def make_vehicle_log(license_plate, employee_id,odometer,fuel_qty = None,price = None, with_services=False,service_detail=None):
+	vehicle_log = frappe.get_doc({
+		"doctype": "Vehicle Log",
+		"license_plate": cstr(license_plate),
+		"employee": employee_id,
+		"date": nowdate(),
+		"odometer": odometer,
+		"fuel_qty": flt(fuel_qty) if fuel_qty else None,
+		"price": flt(price)  if price else None
+	})
+
+	if with_services:
+		vehicle_log.append(service_detail)
+	vehicle_log.flags.ignore_permissions = True
+	vehicle_log.save()
+	vehicle_log.submit()
+
+	return vehicle_log

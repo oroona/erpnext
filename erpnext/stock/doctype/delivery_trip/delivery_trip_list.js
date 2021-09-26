@@ -5,6 +5,8 @@ frappe.listview_settings['Delivery Trip'] = {
 			return [__(doc.status), "red", "status,=," + doc.status];
 		} else if (in_list(["In Transit", "Scheduled"], doc.status)) {
 			return [__(doc.status), "orange", "status,=," + doc.status];
+		} else if (doc.status === "Completed with Order Return") {
+			return [__(doc.status), "yellow", "status,=," + doc.status];
 		} else if (doc.status === "Completed") {
 			return [__(doc.status), "green", "status,=," + doc.status];
 		}

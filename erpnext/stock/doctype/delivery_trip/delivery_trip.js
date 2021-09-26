@@ -155,35 +155,35 @@ frappe.ui.form.on('Delivery Trip', {
 });
 
 frappe.ui.form.on('Delivery Stop', {
-	customer: function (frm, cdt, cdn) {
-		var row = locals[cdt][cdn];
-		if (row.customer) {
-			frappe.call({
-				method: "erpnext.stock.doctype.delivery_trip.delivery_trip.get_contact_and_address",
-				args: { "name": row.customer },
-				callback: function (r) {
-					if (r.message) {
-						if (r.message["shipping_address"]) {
-							frappe.model.set_value(cdt, cdn, "address", r.message["shipping_address"].parent);
-						}
-						else {
-							frappe.model.set_value(cdt, cdn, "address", '');
-						}
-						if (r.message["contact_person"]) {
-							frappe.model.set_value(cdt, cdn, "contact", r.message["contact_person"].parent);
-						}
-						else {
-							frappe.model.set_value(cdt, cdn, "contact", '');
-						}
-					}
-					else {
-						frappe.model.set_value(cdt, cdn, "address", '');
-						frappe.model.set_value(cdt, cdn, "contact", '');
-					}
-				}
-			});
-		}
-	},
+	// customer: function (frm, cdt, cdn) {
+	// 	var row = locals[cdt][cdn];
+	// 	if (row.customer) {
+	// 		frappe.call({
+	// 			method: "erpnext.stock.doctype.delivery_trip.delivery_trip.get_contact_and_address",
+	// 			args: { "name": row.customer },
+	// 			callback: function (r) {
+	// 				if (r.message) {
+	// 					if (r.message["shipping_address"]) {
+	// 						frappe.model.set_value(cdt, cdn, "address", r.message["shipping_address"].parent);
+	// 					}
+	// 					else {
+	// 						frappe.model.set_value(cdt, cdn, "address", '');
+	// 					}
+	// 					if (r.message["contact_person"]) {
+	// 						frappe.model.set_value(cdt, cdn, "contact", r.message["contact_person"].parent);
+	// 					}
+	// 					else {
+	// 						frappe.model.set_value(cdt, cdn, "contact", '');
+	// 					}
+	// 				}
+	// 				else {
+	// 					frappe.model.set_value(cdt, cdn, "address", '');
+	// 					frappe.model.set_value(cdt, cdn, "contact", '');
+	// 				}
+	// 			}
+	// 		});
+	// 	}
+	// },
 
 	address: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
